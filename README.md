@@ -4,5 +4,6 @@ A collection of scripts for network infrastructure that supports on-box automati
 ## Snippets Available
 ```
 .
-TBA
+└── Cisco IOS-XE
+│   └── move_ip_between_vlans.txt
 ```
