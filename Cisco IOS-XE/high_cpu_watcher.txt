@@ -1,0 +1,23 @@
+# Automation script by Brett Verney (@wifiwizardofoz)
+# Language: Cisco EEM Script
+# Version: v0.1 | 14-07-2021
+# Used for: Diagnosing the root cause of High CPU events by logging diagnostic information at the precise time of the CPU spike.
+
+process cpu threshold type total rising 85 interval 5
+!
+event manager applet HIGH_CPU
+event syslog pattern "CPURISINGTHRESHOLD"
+
+action 001 syslog msg "==== HIGH CPU DETECTED. LOGGING DIAGNOSTIC INFO TO flash:HIGH_CPU.txt ===="
+action 002 cli command "enable"
+action 003 cli command "term length 0"
+action 004 cli command "show clock"
+action 005 cli command "show version | append flash:HIGH_CPU.txt"
+action 006 cli command "show switch | append flash:HIGH_CPU.txt"
+action 007 cli command "show process cpu sorted | append flash:HIGH_CPU.txt"
+action 008 cli command "show log | append flash:HIGH_CPU.txt"
+action 009 cli command "show proc mem sort | append flash:HIGH_CPU.txt"
+action 010 cli command "show proc mem platform sort | append flash:HIGH_CPU.txt"
+action 012 syslog msg "==== DIAGNOSTIC INFO STORED IN HIGH_CPU.TXT FILE ===="
+action 013 cli command "end"
+!
