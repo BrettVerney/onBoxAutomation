@@ -1,9 +1,9 @@
 # Automation script by Brett Verney (@wifiwizardofoz)
 # Language: Cisco EEM Script
-# Version: v0.2 | 16-07-2021
+# Version: v0.3 | 24-08-2021
 # Used for: Diagnosing the root cause of High CPU events by logging diagnostic information at the precise time of the CPU spike.
 
-
+event manager applet HIGH_CPU authorization bypass
 process cpu threshold type total rising 85 interval 5
 !
 event manager applet HIGH_CPU
